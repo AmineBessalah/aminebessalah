@@ -1,1 +1,74 @@
-<center>Amine Bessalah site</center>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        body {
+            background-color: #F2EFE7;
+            color: #006A71;
+        }
+        .carousel .carousel-item img {
+            max-height: 300px;
+            object-fit: cover;
+        }
+        .section {
+            padding: 50px 0;
+        }
+        .btn-custom {
+            background-color: #48A6A7;
+        }
+    </style>
+</head>
+<body>
+    <nav class="teal darken-3">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">Mon Site</a>
+        </div>
+    </nav>
+    
+    <div class="container section">
+        <h2 class="center-align">Bienvenue sur mon site</h2>
+        <p class="center-align">Découvrez mon parcours et mes réalisations.</p>
+    </div>
+    
+    <div class="container">
+        <div class="carousel">
+            <a class="carousel-item" href="#one!"><img src="image1.jpg" alt="Photo 1"></a>
+            <a class="carousel-item" href="#two!"><img src="image2.jpg" alt="Photo 2"></a>
+            <a class="carousel-item" href="#three!"><img src="image3.jpg" alt="Photo 3"></a>
+        </div>
+    </div>
+    
+    <div class="container section">
+        <h3>À propos de moi</h3>
+        <p>Petite description sur toi...</p>
+    </div>
+    
+    <div class="container section">
+        <h3>Mon parcours</h3>
+        <p>Ton expérience et tes compétences...</p>
+    </div>
+    
+    <div class="container section">
+        <h3>Contact</h3>
+        <p>Mes coordonnées et réseaux sociaux...</p>
+        <a class="btn btn-custom" href="#">Me contacter</a>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.carousel');
+            M.Carousel.init(elems, {
+                fullWidth: true,
+                indicators: true,
+                duration: 2000 // Défilement toutes les 2 secondes
+            });
+        });
+    </script>
+</body>
+</html>
