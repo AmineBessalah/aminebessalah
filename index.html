@@ -7,7 +7,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Materialize JS (inclus dans le head, mais peut aussi être déplacé avant la fermeture de body) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <style>
     /* Fond de page (.bg) avec flou et marges dynamiques */
     .bg {
@@ -92,11 +93,13 @@
       display: inline-block;
       margin-bottom: 40px;
     }
+    /* Le sous-titre est caché au départ */
     #subtitle {
       font-size: 1.8rem;
-      opacity: 1;
+      opacity: 0;
       color: #a29bfe;
       margin: 10px 0 0;
+      transition: opacity 0.5s ease-out;
     }
     .star {
       position: absolute;
@@ -118,8 +121,12 @@
     a {
       text-decoration: none;
     }
-    /* Carousel d'images */
-    .carousel .carousel-item img {
+    /* Carousel d'images et vidéo */
+    .carousel .carousel-item {
+      width: 100%;
+    }
+    .carousel .carousel-item img,
+    .carousel .carousel-item video {
       width: 100%;
       max-height: 300px;
       object-fit: contain;
@@ -160,7 +167,7 @@
       border-radius: 50%;
       object-fit: cover;
     }
-    /* Style des modales */
+    /* Modales */
     .modal {
       max-width: 90%;
       width: 90%;
@@ -237,7 +244,7 @@
 
   <!-- Contenu principal -->
   <div class="overlay">
-    <!-- Introduction -->
+    <!-- Section d'introduction -->
     <div class="container section" id="intro-section">
       <h2>Bienvenue dans l'Univers du Savoir</h2>
       <div id="subtitle-container">
@@ -250,17 +257,43 @@
       <p>Explorez les profondeurs de l'espace et découvrez le mystique personnage incarnant la connaissance.</p>
     </div>
     
-    <!-- Carousel de photos -->
+    <!-- Carousel de photos et vidéo -->
     <div class="container">
       <div class="carousel carousel-slider center">
-        <div class="carousel-item" href="#one!">
-          <img class="responsive-img" src="images/image1.jpg" alt="Image mystique 1">
+        <!-- Première slide : Vidéo "science.mp4" -->
+        <div class="carousel-item">
+          <video class="responsive-video" controls autoplay muted loop>
+            <source src="images/science.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo.
+          </video>
         </div>
-        <div class="carousel-item" href="#two!">
-          <img class="responsive-img" src="images/image2.jpg" alt="Image mystique 2">
+        <!-- Autres slides : images -->
+        <div class="carousel-item">
+          <img class="responsive-img" src="images/ecole.jpg" alt="Ecole">
         </div>
-        <div class="carousel-item" href="#three!">
-          <img class="responsive-img" src="images/image3.jpg" alt="Image mystique 3">
+        <div class="carousel-item">
+          <img class="responsive-img" src="images/image1.jpg" alt="Image 1">
+        </div>
+        <div class="carousel-item">
+          <img class="responsive-img" src="images/image2.jpg" alt="Image 2">
+        </div>
+        <div class="carousel-item">
+          <img class="responsive-img" src="images/image3.jpg" alt="Image 3">
+        </div>
+        <div class="carousel-item">
+          <img class="responsive-img" src="images/image4.webp" alt="Image 4">
+        </div>
+        <div class="carousel-item">
+          <img class="responsive-img" src="images/image5.webp" alt="Image 5">
+        </div>
+        <div class="carousel-item">
+          <img class="responsive-img" src="images/image6.jpg" alt="Image 6">
+        </div>
+        <div class="carousel-item">
+          <img class="responsive-img" src="images/imagex.webp" alt="Image X">
+        </div>
+        <div class="carousel-item">
+          <img class="responsive-img" src="images/nurse.webp" alt="Nurse">
         </div>
       </div>
     </div>
@@ -294,7 +327,7 @@
     </div>
   </div>
   
-  <!-- Scripts Materialize et initialisation -->
+  <!-- Scripts Materialize et gestion du scroll -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Initialisation du carousel
@@ -339,14 +372,12 @@
       var scrollTopBtn = document.getElementById("scrollTopBtn");
       scrollTopBtn.style.display = (winScroll > 300) ? "block" : "none";
       
-      // Déplacement du contenu d'introduction vers le haut (jusqu'à 200px)
-      var introSection = document.getElementById("intro-section");
-      if (introSection) {
-        introSection.style.transform = "translateY(" + (-Math.min(winScroll, 200)) + "px)";
-      }
+      // Gestion de l'opacité du sous-titre "Avec Amine Bessalah"
+      var subtitle = document.getElementById("subtitle");
+      var opacityVal = Math.min(1, winScroll / 200);
+      subtitle.style.opacity = opacityVal;
     });
     
-    // Bouton scroll-to-top
     document.getElementById("scrollTopBtn").addEventListener("click", function() {
       window.scroll({ top: 0, behavior: 'smooth' });
     });
