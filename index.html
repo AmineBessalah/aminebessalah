@@ -91,13 +91,11 @@
       display: inline-block;
       margin-bottom: 40px;
     }
-    /* Le sous-titre est caché au départ */
     #subtitle {
       font-size: 1.8rem;
-      opacity: 0;
+      opacity: 1;
       color: #a29bfe;
       margin: 10px 0 0;
-      transition: opacity 0.5s ease-out;
     }
     .star {
       position: absolute;
@@ -161,7 +159,7 @@
       border-radius: 50%;
       object-fit: cover;
     }
-    /* Modales */
+    /* Style des modales */
     .modal {
       max-width: 90%;
       width: 90%;
@@ -201,7 +199,7 @@
     <div id="progressBar"></div>
   </div>
 
-  <!-- Bouton scroll-to-top -->
+  <!-- Bouton Scroll-to-top -->
   <button id="scrollTopBtn" class="btn btn-custom" title="Haut de page">↑</button>
 
   <!-- Profils fixes en haut à gauche -->
@@ -238,7 +236,7 @@
 
   <!-- Contenu principal -->
   <div class="overlay">
-    <!-- Section d'introduction -->
+    <!-- Introduction -->
     <div class="container section" id="intro-section">
       <h2>Bienvenue dans l'Univers du Savoir</h2>
       <div id="subtitle-container">
@@ -295,7 +293,8 @@
     </div>
   </div>
   
-  <!-- Scripts Materialize et gestion du scroll -->
+  <!-- Scripts Materialize et initialisation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Initialisation du carousel
@@ -330,7 +329,7 @@
       var blurVal = 10 * (1 - (winScroll / docHeight));
       document.querySelector('.bg').style.filter = 'blur(' + blurVal + 'px)';
       
-      // Ajustement dynamique des marges horizontales de l'image de fond (0 à 20px sur 0-200px)
+      // Ajustement dynamique des marges horizontales de l'image de fond (0 à 20px sur 0-200px de scroll)
       var margin = Math.min(20, (winScroll / 200) * 20);
       var bg = document.querySelector('.bg');
       bg.style.left = margin + "px";
@@ -340,12 +339,14 @@
       var scrollTopBtn = document.getElementById("scrollTopBtn");
       scrollTopBtn.style.display = (winScroll > 300) ? "block" : "none";
       
-      // Gestion de l'opacité du sous-titre "Avec Amine Bessalah"
-      var subtitle = document.getElementById("subtitle");
-      var opacityVal = Math.min(1, winScroll / 200);
-      subtitle.style.opacity = opacityVal;
+      // Déplacement du contenu d'introduction vers le haut (jusqu'à 200px)
+      var introSection = document.getElementById("intro-section");
+      if (introSection) {
+        introSection.style.transform = "translateY(" + (-Math.min(winScroll, 200)) + "px)";
+      }
     });
     
+    // Bouton scroll-to-top
     document.getElementById("scrollTopBtn").addEventListener("click", function() {
       window.scroll({ top: 0, behavior: 'smooth' });
     });
